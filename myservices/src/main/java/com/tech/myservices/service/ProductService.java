@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -30,9 +31,10 @@ public class ProductService {
 	        repository.saveAll(products);
 	    }
     
-    
+    @Cacheable("product")
     public List<Product> findAllProducts()
     {
+    	System.out.println(" inside service class  findAllProducts method: ");
     	return repository.findAll();
     }
     
