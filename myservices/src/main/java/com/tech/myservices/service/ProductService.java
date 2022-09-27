@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +41,13 @@ public class ProductService {
     	return repository.findAll(Sort.by(fieldName).ascending());
     }
     
+    public Page<Product> findProductsWithPagination(int offset,int pageSize){
+    	Page<Product> products=repository.findAll(PageRequest.of(offset, pageSize));
+    	return products;
+    }
+    
+    public Page<Product> findProductsWithPaginationAndSorting(int offset,int pageSize,String fieldName){
+    	Page<Product> products=repository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(fieldName)));
+    	return products;
+    }
 }
