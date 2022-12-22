@@ -28,6 +28,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/{field}")
+	// this methods
 	private APIResponse<List<Product>> getProductsWithSort(@PathVariable String field) {
 		List<Product> allProducts = service.findProductsWithSorting(field);
 		return new APIResponse<>(allProducts.size(), allProducts);
